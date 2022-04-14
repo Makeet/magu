@@ -2,49 +2,57 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Home</title>
-    <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xxbdfdd87e0bf5471baced0304dc59376e"></script>
-    <script type="text/javascript">
-        function initTmap(){
-            if (navigator.geolocation) { // GPS를 지원하면
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    //현재위치의 위도, 경도
-                    curLoc = new Tmapv2.LatLng(
-                        position.coords.latitude,
-                        position.coords.longitude
-                    );
-
-                    var map = new Tmapv2.Map("map_div",
-                        {
-                            center: curLoc, // 지도 초기 좌표
-                            width: "890px",
-                            height: "400px",
-                            zoom: 15
-                        });
-
-                    //현재 위치 마커
-                    var marker = new Tmapv2.Marker({
-                        position: curLoc,
-                        map: map
-                    });
-
-                }, function(error) {
-                    console.error(error);
-                    // alert(error.code);
-                }, {
-                    enableHighAccuracy: false,
-                    maximumAge: 0,
-                    timeout: Infinity
-                });
-            } else {
-                alert('GPS를 지원하지 않습니다');
-            }
-        }
-    </script>
+    <title>simpleMap</title>
 </head>
-<body onload="initTmap()">
+<body>
 <div id="map_div"></div>
-<h1>확인용 h1 태그~~</h1>
 
+<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xxbdfdd87e0bf5471baced0304dc59376e"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(() => {
+        initLocation();
+    })
+
+    function initTmap(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const map = new Tmapv2.Map("map_div", {
+            center: new Tmapv2.LatLng(latitude, longitude), // 지도 초기 좌표
+            width: "890px",
+            height: "400px",
+            zoom: 19 //처음 로드될 때부터 내 위치 크게 보여주기
+        });
+        new Tmapv2.Marker({
+            position: new Tmapv2.LatLng(latitude, longitude), //Marker의 중심좌표 설정
+            animation: Tmapv2.MarkerOptions.ANIMATE_BOUNCE_ONCE,
+            // icon: "/images/pin.png",  //FIXME: 적당한 마커 이미지 필요
+            map: map //Marker가 표시될 Map 설정
+        });
+    }
+
+    function error(error) {
+        console.error(error);
+    }
+
+    function GeoLocationSetting() {
+        return {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: Infinity
+        }
+    }
+
+    function initLocation() {
+        if (!navigator.geolocation) {
+            console.log("GPS를 지원하지 않습니다");
+        } else {
+            navigator.geolocation.getCurrentPosition(initTmap, error, GeoLocationSetting);
+        }
+    }
+</script>
 </body>
 </html>
+
+
