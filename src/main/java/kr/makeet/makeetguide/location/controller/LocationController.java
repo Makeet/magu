@@ -10,6 +10,6 @@ public class LocationController {
     @GetMapping({"/", "/location", "/index"})
     public String index() {
         log.info("index...........");
-        return "/index";
+        return "/index.html";
     }
 }
