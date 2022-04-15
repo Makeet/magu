@@ -5,7 +5,9 @@
     <title>simpleMap</title>
 </head>
 <body>
-<div id="map_div"></div>
+<div id="map_div">
+    <input id="start" placeholder="출발"><input id="end" placeholder="도착">
+</div>
 
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xxbdfdd87e0bf5471baced0304dc59376e"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -20,8 +22,8 @@
         const longitude = position.coords.longitude;
         const map = new Tmapv2.Map("map_div", {
             center: new Tmapv2.LatLng(latitude, longitude), // 지도 초기 좌표
-            width: "890px",
-            height: "400px",
+            width: "95vw",
+            height: "95vh",
             zoom: 19 //처음 로드될 때부터 내 위치 크게 보여주기
         });
         new Tmapv2.Marker({
