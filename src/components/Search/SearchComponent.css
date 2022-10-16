@@ -1,0 +1,36 @@
+#search_box {
+    height: 50px;
+    width: 610px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    position:absolute;
+    z-index: 2;
+}
+
+
+.menu_bar_icon {
+    float: left;
+    margin: 16px 10px 16px 20px;
+    padding-right: 15px;
+    border-right: 2px solid #bbb;
+}
+
+.search_icon {
+    float: left;
+    margin: 16px 0px 16px 20px;
+}
+
+#search_box_input {
+    float: left;
+    width: 80%;
+    height: 35px;
+    margin: 8px 0px 8px 0px;
+    border: 0px;
+    padding: 0px 10px 0px 5px;
+}
+
+#search_box_input::placeholder {
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
