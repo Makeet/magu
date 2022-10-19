@@ -8,9 +8,8 @@ export default function MainPage() {
             position: "relative",
           }}>
             <SearchComponent />
-            <FavoriteComponent/>
             <MapComponent/>
-            
+            <FavoriteComponent/>
         </div>
     )
 }
