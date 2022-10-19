@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as FaStarRegular } from "@fortawesome/free-regular-svg-icons";
@@ -9,10 +9,14 @@ const FavoriteIconComponent = (props) => {
   const toggleFavoriteIcon = () => {
     setFavorite((isSelected) => !isSelected);
   };
+  useEffect(() => {
+    setFavorite(props.buttonState)
+  }, [props.buttonState]);
+  
   return (
     <div onClick={toggleFavoriteIcon}>
       <FontAwesomeIcon
-        icon={props.buttonState|isSelected ? faStar : FaStarRegular}
+        icon={isSelected ? faStar : FaStarRegular}
         className="favoritesIcon"
       />
     </div>
