@@ -1,0 +1,30 @@
+:root {
+  --button-color: #ffffff;
+  --button-bg-color: #979797;
+  --button-hover-bg-color: #5d5e5e;
+}
+.favoritesWrapper {
+  position: relative;
+  top: 60px;
+  z-index: 1;
+  display: inline-block;
+}
+.favoriteButton {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: fixed;
+  margin: 3px;
+  padding: 1rem;
+
+  right: 5vw;
+  background: var(--button-color);
+  border: none;
+  border-radius: 50%;
+  /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
+  cursor: pointer;
+  transition: 0.5s;
+}
+.favoritesIcon {
+  font-size: 17px;
+}
