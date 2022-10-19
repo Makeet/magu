@@ -11,7 +11,7 @@ const FavoriteComponent = () => {
     <>
       <div className="favoritesWrapper">
         <button className="favoriteButton" onClick={toggleFavoriteButton}>
-          <FavoriteIcon iconState={isSelected}/>
+          <FavoriteIcon buttonState={isSelected}/>
         </button> 
       </div>
       
