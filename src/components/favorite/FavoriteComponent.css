@@ -15,7 +15,7 @@
   appearance: none;
   position: fixed;
   margin: 3px;
-  padding: 1rem;
+  padding: 0.8rem;
 
   right: 5vw;
   background: var(--button-color);
