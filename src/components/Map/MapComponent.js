@@ -19,6 +19,7 @@ export default function MapComponent() {
       script.async = "async";
       document.head.appendChild(script);
     }, []);
+ 
 
     return (
         <div
