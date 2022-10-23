@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import FavoriteIconComponent from '../favorite/FavoriteIconComponent';
+import FavoriteIconComponent from '../Favorite/FavoriteIconComponent';
 
 
 export default function HistoryComponent({keywords, onClearKeywords, onRemoveKeyword}) {
