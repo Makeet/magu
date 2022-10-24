@@ -5,7 +5,6 @@ export default function MapComponent() {
   useEffect(() => {
     const script = document.createElement("script");
     if (navigator.geolocation) {
-      console.log("현 위치 작업 가능");
       navigator.geolocation.getCurrentPosition((position) => {
         let pos = position.coords;
         script.innerHTML =
@@ -27,6 +26,7 @@ export default function MapComponent() {
      `;
       });
     }
+    // TODO -기기에서 현 위치 조회 안 될 때 작업해야함
     script.type = "text/javascript";
     script.async = "async";
     document.head.appendChild(script);
