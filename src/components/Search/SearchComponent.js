@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./SearchComponent.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCommentsDollar, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import HistoryComponent from './HistoryComponent';
 
 export default function SearchComponent() {
@@ -16,8 +16,9 @@ export default function SearchComponent() {
   
   const onSearch = (e) => {
     e.preventDefault();
-    // 검색어가 있을 경우
-    if(search !== null || search !== '') {
+    if(search === null || search === '') {
+      alert("주소를 입력해주세요.");
+    }else { // 검색어가 있을 경우
       handleAddKeyword(search);
       //input에 입력된 글자 제거
       setSearch("");
@@ -68,12 +69,12 @@ export default function SearchComponent() {
               <FontAwesomeIcon icon={faMagnifyingGlass} className="search_icon" />
             </button>
           </form>
+          <HistoryComponent 
+            keywords={keywords}
+            onClearKeywords={handleClearKeywords}
+            onRemoveKeyword={handleRemoveKeyword}
+          />
         </div>
-        <HistoryComponent 
-          keywords={keywords}
-          onClearKeywords={handleClearKeywords}
-          onRemoveKeyword={handleRemoveKeyword}
-        />
       </div>
       );
 
