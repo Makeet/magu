@@ -1,45 +1,29 @@
 import React, { useEffect } from "react";
 import { faLongArrowAltDown } from "@fortawesome/free-solid-svg-icons";
 
+const { Tmapv2 }=window
 export default function MapComponent() {
+  let map;
+  function createMap() {
+    map = new window.Tmapv2.Map("TMapContainer", {
+      center: new window.Tmapv2.LatLng(37.566481622437934, 126.98502302169841),
+      width: "100%",
+      height: "500px",
+      zoom: 15,
+      https: true,
+    });
+    console.log("tmap!!!!")
+  }
   useEffect(() => {
-    const script = document.createElement("script");
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        let pos = position.coords;
-        script.innerHTML =
-          `         
-          function initTmap() {
-              var map = new Tmapv2.Map("TMapApp", {
-                  center: new Tmapv2.LatLng(` +
-          pos.latitude +
-          `,` +
-          pos.longitude +
-          `),
-                  width: "100%",
-                  height: "100%",
-                  zoom:15
-              });
-          }
-          
-          initTmap();
-     `;
-      });
-    }
-    // TODO -기기에서 현 위치 조회 안 될 때 작업해야함
-    script.type = "text/javascript";
-    script.async = "async";
-    document.head.appendChild(script);
+    createMap();
+    
+    // // TODO - 기기에서 현 위치 조회 안 될 때 작업해야함
+    // // TODO - 모바일 기기에서도 처리 가능하도록 https:// 환경으로 변경필요
   }, []);
 
   return (
     <div
-      id="TMapApp"
-      style={{
-        height: "100%",
-        width: "100%",
-        position: "fixed",
-      }}
+      id="TMapContainer"
     />
   );
 }
