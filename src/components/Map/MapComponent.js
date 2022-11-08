@@ -10,11 +10,16 @@ export default function MapComponent() {
       center: new window.Tmapv2.LatLng(lat, lng),
       width: "100vw",
       height: "100vh",
-      zoom: 15,
+      zoom: 17,
       https: true,
     });
-    console.log("tmap!!!!")
+    //현 위치 마커 생성
+    const marker = new Tmapv2.Marker({
+			position: new Tmapv2.LatLng(lat, lng), //Marker의 중심좌표 설정.
+			map: map //Marker가 표시될 Map 설정..
+		});
   }
+
   useEffect(() => {
     if(!navigator.geolocation){
       alert("위치를 찾을 수 없습니다. 기본 위치로 안내합니다.")
