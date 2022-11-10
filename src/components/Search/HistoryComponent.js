@@ -4,12 +4,12 @@ import { faClock } from '@fortawesome/free-regular-svg-icons';
 import FavoriteIconComponent from '../Favorite/FavoriteIconComponent';
 
 
-export default function HistoryComponent({keywords, onClearKeywords, onRemoveKeyword}) {
+export default function HistoryComponent({keywords, onClearKeywords, onRemoveKeyword, onClickLog}) {
 
     // list maximum size 5
     const listkeywords = keywords.slice(0, 5).map((keyword) =>
         (
-            <li>
+            <li onClick={() => {onClickLog(keyword.text)}}>
                 <FontAwesomeIcon icon={faClock} className="log_icon" />
                 <p>{keyword.text}</p>
                 <button class="remove_btn btn" onClick={() => {onRemoveKeyword(keyword.id)}}>X</button>

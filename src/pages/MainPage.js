@@ -8,7 +8,7 @@ export default function MainPage({map}) {
 
     return (
         <div style={{
-            position: "relative",
+            position: "absolute",
           }}>
             <SearchComponent map={map} />
             {/* <MapComponent/> */}

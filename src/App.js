@@ -17,7 +17,7 @@ function App() {
   function createMap(lng, lat) { 
     setMap(new window.Tmapv2.Map("TMapContainer", {
       center: new window.Tmapv2.LatLng(lat, lng),
-      width: "100vw",
+      width: "100%",
       height: "100vh",
       zoom: zoom,
       https: true,
@@ -26,21 +26,17 @@ function App() {
   }
 
   useEffect(() => {
-    //현재 위치를 찾을 수 없을 경우
-    if(!navigator.geolocation){
-      alert("현재 위치를 찾을 수 없습니다. 기본 위치로 안내합니다.")
-      const lng=126.98502302169841;
-      const lat=37.566481622437934;
-      createMap(lat, lng)
-    }
-    else { //현재 위치를 찾을 수 있는 경우
+
+    if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition((position) => {
-        const lng=position.coords.longitude
-        const lat=position.coords.latitude
-        createMap(lng, lat)
+        lng=position.coords.longitude
+        lat=position.coords.latitude
       });
     }
-    
+    else { 
+      alert("현재 위치를 찾을 수 없습니다.")
+    }
+    createMap(lng, lat)
   }, []);
 
 
