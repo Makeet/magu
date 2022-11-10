@@ -60,6 +60,16 @@ export default function SearchComponent({map}) {
     setKeywords([])
   }
 
+  //마커의 옵션을 설정해주는 함수
+	function addMarker(lonlatoption){
+		// 마커 생성
+		const marker = new Tmapv2.Marker({
+			position: new Tmapv2.LatLng(lonlatoption.lonlat.latitude(),lonlatoption.lonlat.longitude()), //Marker의 중심좌표 설정.
+			map: map, //Marker가 표시될 Map 설정..
+			title : lonlatoption.title //마우스 위치시 출력할 타이틀
+		});
+	}
+
   //검색어로 주소 검색
   const handleSearchPOI = (e) => {
     e.preventDefault();
@@ -94,12 +104,31 @@ export default function SearchComponent({map}) {
   //POI검색
   function onComplete() {
     console.log("onComplete");
+    console.log(this._responseData); //json로 데이터를 받은 정보들을 콘솔창에서 확인할 수 있습니다.
+      
+    if(this._responseData.searchPoiInfo.pois.poi != ''){
+      this._responseData.searchPoiInfo.pois.poi.map(function(poi){
+        const name = poi.name;
+        const id = poi.id;
+        const lon = poi.frontLon;
+        const lat = poi.frontLat;
+        const lonlatoption = {
+          title : name,//마커 라벨 text 설정
+          lonlat: new Tmapv2.LatLng(lat,lon)//마커 라벨 좌표 설정
+        }
+        addMarker(lonlatoption);
+      });
+  }else {
+      alert('검색결과가 없습니다.');
+  }
+    map.setCenter(new Tmapv2.LatLng(this._responseData.searchPoiInfo.pois.poi[0].frontLat, this._responseData.searchPoiInfo.pois.poi[0].frontLon));
+    map.setZoom(14);
 
   }
   
   //데이터 로드중 실행하는 함수
   function onProgress(){
-    console.log("onProgress");
+    // console.log("onProgress");
   }
   
   //데이터 로드 중 에러가 발생시 실행하는 함수
