@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { faLongArrowAltDown } from "@fortawesome/free-solid-svg-icons";
 
 const { Tmapv2 }=window
 export default function MapComponent() {

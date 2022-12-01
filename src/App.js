@@ -1,12 +1,11 @@
 import MainPage from './pages/MainPage';
 import React, { useEffect, useState } from "react";
 import './App.css';
-
+import useCurrentLocation from './utils/hooks/useCurrentLocation';
+import { geolocationOptions } from './utils/constants/geolocationOptions';
 function App() {
 
   const [map, setMap] = useState(null);
-  const lng=126.98502302169841;
-  const lat=37.566481622437934;
   let zoom = 10;
 
   if(window.screen.width >= 768) {
@@ -14,7 +13,7 @@ function App() {
   }
   
   
-  function createMap(lng, lat) { 
+  function createMap(lat, lng) { 
     setMap(new window.Tmapv2.Map("TMapContainer", {
       center: new window.Tmapv2.LatLng(lat, lng),
       width: "100%",
@@ -24,21 +23,13 @@ function App() {
     }));
    
   }
-
-  useEffect(() => {
-
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition((position) => {
-        lng=position.coords.longitude
-        lat=position.coords.latitude
-      });
-    }
-    else { 
-      alert("현재 위치를 찾을 수 없습니다.")
-    }
-    createMap(lng, lat)
-  }, []);
-
+  const { location: currentLocation, error: currentError  } = useCurrentLocation(geolocationOptions);
+  useEffect(()=>{
+    if (!currentLocation) return;
+    if (currentError) alert(currentError);
+    // console.log(currentLocation.latitude, currentLocation.longitude);
+    createMap(currentLocation.latitude, currentLocation.longitude)
+  },[currentLocation])
 
   return (
     <div className="App">
